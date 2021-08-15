@@ -9,9 +9,26 @@ repositories {
     mavenCentral()
 }
 
+def platform
+if (org.gradle.internal.os.OperatingSystem.current().windows) {
+    platform = "win"
+} else if (org.gradle.internal.os.OperatingSystem.current().linux) {
+    platform = "linux"
+} else if (org.gradle.internal.os.OperatingSystem.current().macOsX) {
+    platform = "mac"
+}
+
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation "org.openjfx:javafx-base:16:${platform}"
+    implementation "org.openjfx:javafx-controls:16:${platform}"
+    implementation "org.openjfx:javafx-graphics:16:${platform}"
+    implementation "org.openjfx:javafx-fxml:16:${platform}"
+    implementation "org.openjfx:javafx-swing:16:${platform}"
+    implementation "org.openjfx:javafx-media:16:${platform}"
+    implementation "org.openjfx:javafx-web:16:${platform}"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
 }
 
 test {
